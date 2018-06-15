@@ -14,9 +14,24 @@
   <arg name="min_payload"  default="0.0"/>
   <arg name="max_payload"  default="5.0"/>
   <arg name="prefix" default="" />
+  <arg name="shutdown_on_disconnect" default="true" />
+  <arg name="tra_z"/>
+  <arg name="tra_x"/>
+  <arg name="tra_y"/>
+  <arg name="ori_p"/>
+  <arg name="ori_y"/>
+  <arg name="ori_r"/>
+  <arg name="cad_name"/>
   <!-- robot model -->
   <include file="$(find ur_description)/launch/ur5_upload.launch">
     <arg name="limited" value="$(arg limited)"/>
+    <arg name="tra_z" value="$(arg tra_z)"/>
+    <arg name="tra_x" value="$(arg tra_x)"/>
+    <arg name="tra_y" value="$(arg tra_y)"/>
+    <arg name="ori_p" value="$(arg ori_p)"/>
+    <arg name="ori_y" value="$(arg ori_y)"/>
+    <arg name="ori_r" value="$(arg ori_r)"/>
+    <arg name="cad_name" value="$(arg cad_name)"/>
   </include>
   
   <!-- ur common -->
@@ -25,6 +40,7 @@
     <arg name="robot_ip" value="$(arg robot_ip)"/>
     <arg name="min_payload"  value="$(arg min_payload)"/>
     <arg name="max_payload"  value="$(arg max_payload)"/>
+    <arg name="shutdown_on_disconnect" value="$(arg shutdown_on_disconnect)"/>
   </include>
 
 </launch>
