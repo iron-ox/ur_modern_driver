@@ -48,6 +48,7 @@
 #include "ur_msgs/Digital.h"
 #include "ur_msgs/Analog.h"
 #include "std_msgs/String.h"
+#include "std_msgs/Int16.h"
 #include <controller_manager/controller_manager.h>
 
 /// TF
@@ -581,6 +582,7 @@ private:
 		ros::Publisher wrench_pub = nh_.advertise<geometry_msgs::WrenchStamped>(
 				"wrench", 1);
         ros::Publisher tool_vel_pub = nh_.advertise<geometry_msgs::TwistStamped>("tool_velocity", 1);
+		ros::Publisher robot_mode_pub = nh_.advertise<std_msgs::Int16>("robot_mode", 1);
         static tf::TransformBroadcaster br;
 		while (ros::ok()) {
 			sensor_msgs::JointState joint_msg;
@@ -613,6 +615,10 @@ private:
 			wrench_msg.wrench.torque.z = tcp_force[5];
 			wrench_pub.publish(wrench_msg);
 
+			std_msgs::Int16 robot_mode_msg;
+			robot_mode_msg.data = robot_.rt_interface_->robot_state_->getRobotMode();
+			robot_mode_pub.publish(state_msg);
+			
             // Tool vector: Actual Cartesian coordinates of the tool: (x,y,z,rx,ry,rz), where rx, ry and rz is a rotation vector representation of the tool orientation
             std::vector<double> tool_vector_actual = robot_.rt_interface_->robot_state_->getToolVectorActual();
 
