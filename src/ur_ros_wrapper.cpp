@@ -617,7 +617,7 @@ private:
 
 			std_msgs::Int16 robot_mode_msg;
 			robot_mode_msg.data = robot_.rt_interface_->robot_state_->getRobotMode();
-			robot_mode_pub.publish(state_msg);
+			robot_mode_pub.publish(robot_mode_msg);
 			
             // Tool vector: Actual Cartesian coordinates of the tool: (x,y,z,rx,ry,rz), where rx, ry and rz is a rotation vector representation of the tool orientation
             std::vector<double> tool_vector_actual = robot_.rt_interface_->robot_state_->getToolVectorActual();
